@@ -1,16 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Team {
@@ -18,12 +13,49 @@ model Team {
   name    String
   logo    String
   players Player[]
+  matches Match[]
 }
 
 model Player {
   id      String  @id @default(cuid())
   name    String
   image   String?
+  goals   Goal[]
   team_id String
   team    Team    @relation(fields: [team_id], references: [id])
+}
+
+enum Round {
+  First
+  Second
+}
+
+model Match {
+  id                 String          @id @default(cuid())
+  teams              Team[]
+  goals              Goal[]
+  round              Round
+  played             Boolean         @default(false)
+  weekly_schedule    WeeklySchedule? @relation(fields: [weekly_schedule_id], references: [id])
+  weekly_schedule_id String?
+}
+
+model Goal {
+  id        String @id @default(cuid())
+  player    Player @relation(fields: [player_id], references: [id])
+  player_id String
+  match     Match  @relation(fields: [match_id], references: [id])
+  match_id  String
+}
+
+model WeeklySchedule {
+  id          String    @id @default(cuid())
+  matches     Match[]
+  schedule    Schedule? @relation(fields: [schedule_id], references: [id])
+  schedule_id String?
+}
+
+model Schedule {
+  id               String           @id @default(cuid())
+  weekly_schedules WeeklySchedule[]
 }
