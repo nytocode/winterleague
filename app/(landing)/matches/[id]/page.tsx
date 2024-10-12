@@ -7,6 +7,7 @@ import { DeleteGoal } from "@/components/delete-goal";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { ChangeMatchStatus } from "@/components/change-match-status";
 
 interface Props {
   params: {
@@ -47,6 +48,7 @@ export default async function Page({ params: { id } }: Props) {
 
   return (
     <div className="py-4 space-y-4">
+      <ChangeMatchStatus match={id} played={match.played} />
       <div className="grid grid-cols-11 p-2 items-center">
         <div className="col-span-5 overflow-hidden flex items-center gap-2">
           <span className="overflow-hidden flex-1 text-nowrap text-ellipsis text-xs font-medium">
