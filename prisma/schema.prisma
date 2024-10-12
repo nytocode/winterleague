@@ -17,12 +17,13 @@ model Team {
 }
 
 model Player {
-  id      String  @id @default(cuid())
-  name    String
-  image   String?
-  goals   Goal[]
-  team_id String
-  team    Team    @relation(fields: [team_id], references: [id])
+  id         String  @id @default(cuid())
+  first_name String
+  last_name  String?
+  image      String?
+  goals      Goal[]
+  team_id    String
+  team       Team    @relation(fields: [team_id], references: [id])
 }
 
 enum Round {

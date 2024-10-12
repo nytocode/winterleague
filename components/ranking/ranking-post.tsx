@@ -101,110 +101,105 @@ export const RankingPost = ({ ranking }: Props) => {
             width / 2 - ctx_1.measureText("2024/2025").width / 2,
             290,
           );
-          ctx_1.font = "48px Righteous";
           ctx_1.fillText(
             "CLASSIFICA",
             width / 2 - ctx_1.measureText("CLASSIFICA").width / 2,
             340,
           );
 
-          ctx_2.font = "48px Righteous";
           ctx_2.fillText(
             "CLASSIFICA",
             width / 2 - ctx_1.measureText("CLASSIFICA").width / 2,
             340,
           );
 
-          ctx_1.font = "32px Righteous";
           // WIN, DEFEAT, TIE, POINTS
           ctx_1.fillStyle = "#FFF";
-          ctx_1.fillRect(600, 410, 70, 70);
+          ctx_1.fillRect(600, 450, 70, 70);
           ctx_1.fillStyle = "#CBA84E";
-          ctx_1.strokeRect(600, 410, 70, 70);
+          ctx_1.strokeRect(600, 450, 70, 70);
           ctx_1.lineWidth = 2;
           ctx_1.stroke();
           ctx_1.textBaseline = "middle";
           ctx_1.fillStyle = "#000";
-          ctx_1.fillText("V", 635 - ctx_1.measureText("V").width / 2, 445);
+          ctx_1.fillText("V", 635 - ctx_1.measureText("V").width / 2, 485);
 
           ctx_1.fillStyle = "#FFF";
-          ctx_1.fillRect(700, 410, 70, 70);
+          ctx_1.fillRect(700, 450, 70, 70);
           ctx_1.fillStyle = "#CBA84E";
-          ctx_1.strokeRect(700, 410, 70, 70);
+          ctx_1.strokeRect(700, 450, 70, 70);
           ctx_1.lineWidth = 2;
           ctx_1.stroke();
           ctx_1.textBaseline = "middle";
           ctx_1.fillStyle = "#000";
-          ctx_1.fillText("S", 735 - ctx_1.measureText("S").width / 2, 445);
+          ctx_1.fillText("S", 735 - ctx_1.measureText("S").width / 2, 485);
 
           ctx_1.fillStyle = "#FFF";
-          ctx_1.fillRect(800, 410, 70, 70);
+          ctx_1.fillRect(800, 450, 70, 70);
           ctx_1.fillStyle = "#CBA84E";
-          ctx_1.strokeRect(800, 410, 70, 70);
+          ctx_1.strokeRect(800, 450, 70, 70);
           ctx_1.lineWidth = 2;
           ctx_1.stroke();
           ctx_1.textBaseline = "middle";
           ctx_1.fillStyle = "#000";
-          ctx_1.fillText("P", 835 - ctx_1.measureText("P").width / 2, 445);
+          ctx_1.fillText("P", 835 - ctx_1.measureText("P").width / 2, 485);
 
           ctx_1.fillStyle = "#FFF";
-          ctx_1.fillRect(900, 410, 70, 70);
+          ctx_1.fillRect(900, 450, 70, 70);
           ctx_1.fillStyle = "#CBA84E";
-          ctx_1.strokeRect(900, 410, 70, 70);
+          ctx_1.strokeRect(900, 450, 70, 70);
           ctx_1.lineWidth = 2;
           ctx_1.stroke();
           ctx_1.textBaseline = "middle";
           ctx_1.fillStyle = "#000";
-          ctx_1.fillText("P", 935 - ctx_1.measureText("P").width / 2, 445);
-
-          ctx_2.font = "32px Righteous";
+          ctx_1.fillText("P", 935 - ctx_1.measureText("P").width / 2, 485);
 
           ctx_2.fillStyle = "#FFF";
-          ctx_2.fillRect(600, 410, 70, 70);
+          ctx_2.fillRect(600, 450, 70, 70);
           ctx_2.fillStyle = "#CBA84E";
-          ctx_2.strokeRect(600, 410, 70, 70);
+          ctx_2.strokeRect(600, 450, 70, 70);
           ctx_2.lineWidth = 2;
           ctx_2.stroke();
           ctx_2.textBaseline = "middle";
           ctx_2.fillStyle = "#000";
-          ctx_2.fillText("V", 635 - ctx_2.measureText("V").width / 2, 445);
+          ctx_2.fillText("V", 635 - ctx_2.measureText("V").width / 2, 485);
 
           ctx_2.fillStyle = "#FFF";
-          ctx_2.fillRect(700, 410, 70, 70);
+          ctx_2.fillRect(700, 450, 70, 70);
           ctx_2.fillStyle = "#CBA84E";
-          ctx_2.strokeRect(700, 410, 70, 70);
+          ctx_2.strokeRect(700, 450, 70, 70);
           ctx_2.lineWidth = 2;
           ctx_2.stroke();
           ctx_2.textBaseline = "middle";
           ctx_2.fillStyle = "#000";
-          ctx_2.fillText("S", 735 - ctx_2.measureText("S").width / 2, 445);
+          ctx_2.fillText("S", 735 - ctx_2.measureText("S").width / 2, 485);
 
           ctx_2.fillStyle = "#FFF";
-          ctx_2.fillRect(800, 410, 70, 70);
+          ctx_2.fillRect(800, 450, 70, 70);
           ctx_2.fillStyle = "#CBA84E";
-          ctx_2.strokeRect(800, 410, 70, 70);
+          ctx_2.strokeRect(800, 450, 70, 70);
           ctx_2.lineWidth = 2;
           ctx_2.stroke();
           ctx_2.textBaseline = "middle";
           ctx_2.fillStyle = "#000";
-          ctx_2.fillText("P", 835 - ctx_2.measureText("P").width / 2, 445);
+          ctx_2.fillText("P", 835 - ctx_2.measureText("P").width / 2, 485);
 
           ctx_2.fillStyle = "#FFF";
-          ctx_2.fillRect(900, 410, 70, 70);
+          ctx_2.fillRect(900, 450, 70, 70);
           ctx_2.fillStyle = "#CBA84E";
-          ctx_2.strokeRect(900, 410, 70, 70);
+          ctx_2.strokeRect(900, 450, 70, 70);
           ctx_2.lineWidth = 2;
           ctx_2.stroke();
           ctx_2.textBaseline = "middle";
           ctx_2.fillStyle = "#000";
-          ctx_2.fillText("P", 935 - ctx_2.measureText("P").width / 2, 445);
+          ctx_2.fillText("P", 935 - ctx_2.measureText("P").width / 2, 485);
 
           ranking.forEach((rank, i) => {
             if (i < 7) {
               ctx_1.fillStyle = "#FFF";
-              ctx_1.fillRect(100, 500 + 95 * i, 450, 70);
+              ctx_1.fillRect(100, 540 + 95 * i, 450, 70);
               ctx_1.fillStyle = "#CBA84E";
-              ctx_1.strokeRect(100, 500 + 95 * i, 450, 70);
+              ctx_1.strokeRect(100, 540 + 95 * i, 450, 70);
               ctx_1.lineWidth = 2;
               ctx_1.stroke();
               const teamLogo = new Image();
@@ -214,7 +209,7 @@ export const RankingPost = ({ ranking }: Props) => {
                 ctx_1.drawImage(
                   teamLogo,
                   125,
-                  535 - 25 * (teamLogo.height / teamLogo.width) + 95 * i,
+                  575 - 25 * (teamLogo.height / teamLogo.width) + 95 * i,
                   50,
                   50 * (teamLogo.height / teamLogo.width),
                 );
@@ -222,12 +217,12 @@ export const RankingPost = ({ ranking }: Props) => {
 
               ctx_1.textBaseline = "middle";
               ctx_1.fillStyle = "#000";
-              ctx_1.fillText(rank.team.name, 195, 540 + 95 * i);
+              ctx_1.fillText(rank.team.name, 195, 580 + 95 * i);
 
               ctx_1.fillStyle = "#FFF";
-              ctx_1.fillRect(600, 500 + 95 * i, 70, 70);
+              ctx_1.fillRect(600, 540 + 95 * i, 70, 70);
               ctx_1.fillStyle = "#CBA84E";
-              ctx_1.strokeRect(600, 500 + 95 * i, 70, 70);
+              ctx_1.strokeRect(600, 540 + 95 * i, 70, 70);
               ctx_1.lineWidth = 2;
               ctx_1.stroke();
               ctx_1.textBaseline = "middle";
@@ -235,13 +230,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_1.fillText(
                 rank.w.toString(),
                 635 - ctx_1.measureText(rank.w.toString()).width / 2,
-                535 + 95 * i,
+                575 + 95 * i,
               );
 
               ctx_1.fillStyle = "#FFF";
-              ctx_1.fillRect(700, 500 + 95 * i, 70, 70);
+              ctx_1.fillRect(700, 540 + 95 * i, 70, 70);
               ctx_1.fillStyle = "#CBA84E";
-              ctx_1.strokeRect(700, 500 + 95 * i, 70, 70);
+              ctx_1.strokeRect(700, 540 + 95 * i, 70, 70);
               ctx_1.lineWidth = 2;
               ctx_1.stroke();
               ctx_1.textBaseline = "middle";
@@ -249,13 +244,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_1.fillText(
                 rank.d.toString(),
                 735 - ctx_1.measureText(rank.d.toString()).width / 2,
-                535 + 95 * i,
+                575 + 95 * i,
               );
 
               ctx_1.fillStyle = "#FFF";
-              ctx_1.fillRect(800, 500 + 95 * i, 70, 70);
+              ctx_1.fillRect(800, 540 + 95 * i, 70, 70);
               ctx_1.fillStyle = "#CBA84E";
-              ctx_1.strokeRect(800, 500 + 95 * i, 70, 70);
+              ctx_1.strokeRect(800, 540 + 95 * i, 70, 70);
               ctx_1.lineWidth = 2;
               ctx_1.stroke();
               ctx_1.textBaseline = "middle";
@@ -263,13 +258,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_1.fillText(
                 rank.t.toString(),
                 835 - ctx_1.measureText(rank.t.toString()).width / 2,
-                535 + 95 * i,
+                575 + 95 * i,
               );
 
               ctx_1.fillStyle = "#FFF";
-              ctx_1.fillRect(900, 500 + 95 * i, 70, 70);
+              ctx_1.fillRect(900, 540 + 95 * i, 70, 70);
               ctx_1.fillStyle = "#CBA84E";
-              ctx_1.strokeRect(900, 500 + 95 * i, 70, 70);
+              ctx_1.strokeRect(900, 540 + 95 * i, 70, 70);
               ctx_1.lineWidth = 2;
               ctx_1.stroke();
               ctx_1.textBaseline = "middle";
@@ -277,13 +272,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_1.fillText(
                 rank.p.toString(),
                 935 - ctx_1.measureText(rank.p.toString()).width / 2,
-                535 + 95 * i,
+                575 + 95 * i,
               );
             } else {
               ctx_2.fillStyle = "#FFF";
-              ctx_2.fillRect(100, 500 + 95 * (i - 7), 450, 70);
+              ctx_2.fillRect(100, 540 + 95 * (i - 7), 450, 70);
               ctx_2.fillStyle = "#CBA84E";
-              ctx_2.strokeRect(100, 500 + 95 * (i - 7), 450, 70);
+              ctx_2.strokeRect(100, 540 + 95 * (i - 7), 450, 70);
               ctx_2.lineWidth = 2;
               ctx_2.stroke();
               const teamLogo = new Image();
@@ -293,7 +288,7 @@ export const RankingPost = ({ ranking }: Props) => {
                 ctx_2.drawImage(
                   teamLogo,
                   125,
-                  535 - 25 * (teamLogo.height / teamLogo.width) + 95 * (i - 7),
+                  575 - 25 * (teamLogo.height / teamLogo.width) + 95 * (i - 7),
                   50,
                   50 * (teamLogo.height / teamLogo.width),
                 );
@@ -301,12 +296,12 @@ export const RankingPost = ({ ranking }: Props) => {
 
               ctx_2.textBaseline = "middle";
               ctx_2.fillStyle = "#000";
-              ctx_2.fillText(rank.team.name, 195, 540 + 95 * (i - 7));
+              ctx_2.fillText(rank.team.name, 195, 580 + 95 * (i - 7));
 
               ctx_2.fillStyle = "#FFF";
-              ctx_2.fillRect(600, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.fillRect(600, 540 + 95 * (i - 7), 70, 70);
               ctx_2.fillStyle = "#CBA84E";
-              ctx_2.strokeRect(600, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.strokeRect(600, 540 + 95 * (i - 7), 70, 70);
               ctx_2.lineWidth = 2;
               ctx_2.stroke();
               ctx_2.textBaseline = "middle";
@@ -314,13 +309,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_2.fillText(
                 rank.w.toString(),
                 635 - ctx_2.measureText(rank.w.toString()).width / 2,
-                535 + 95 * (i - 7),
+                575 + 95 * (i - 7),
               );
 
               ctx_2.fillStyle = "#FFF";
-              ctx_2.fillRect(700, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.fillRect(700, 540 + 95 * (i - 7), 70, 70);
               ctx_2.fillStyle = "#CBA84E";
-              ctx_2.strokeRect(700, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.strokeRect(700, 540 + 95 * (i - 7), 70, 70);
               ctx_2.lineWidth = 2;
               ctx_2.stroke();
               ctx_2.textBaseline = "middle";
@@ -328,13 +323,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_2.fillText(
                 rank.d.toString(),
                 735 - ctx_2.measureText(rank.d.toString()).width / 2,
-                535 + 95 * (i - 7),
+                575 + 95 * (i - 7),
               );
 
               ctx_2.fillStyle = "#FFF";
-              ctx_2.fillRect(800, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.fillRect(800, 540 + 95 * (i - 7), 70, 70);
               ctx_2.fillStyle = "#CBA84E";
-              ctx_2.strokeRect(800, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.strokeRect(800, 540 + 95 * (i - 7), 70, 70);
               ctx_2.lineWidth = 2;
               ctx_2.stroke();
               ctx_2.textBaseline = "middle";
@@ -342,13 +337,13 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_2.fillText(
                 rank.t.toString(),
                 835 - ctx_2.measureText(rank.t.toString()).width / 2,
-                535 + 95 * (i - 7),
+                575 + 95 * (i - 7),
               );
 
               ctx_2.fillStyle = "#FFF";
-              ctx_2.fillRect(900, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.fillRect(900, 540 + 95 * (i - 7), 70, 70);
               ctx_2.fillStyle = "#CBA84E";
-              ctx_2.strokeRect(900, 500 + 95 * (i - 7), 70, 70);
+              ctx_2.strokeRect(900, 540 + 95 * (i - 7), 70, 70);
               ctx_2.lineWidth = 2;
               ctx_2.stroke();
               ctx_2.textBaseline = "middle";
@@ -356,7 +351,7 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx_2.fillText(
                 rank.p.toString(),
                 935 - ctx_2.measureText(rank.p.toString()).width / 2,
-                535 + 95 * (i - 7),
+                575 + 95 * (i - 7),
               );
             }
           });

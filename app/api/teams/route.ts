@@ -46,8 +46,6 @@ export async function POST(req: Request) {
 
     const picture = await uploadFile("images", `logos/${file_name}`, logo);
 
-    console.log(picture);
-
     if (!picture) {
       return Response.json({ message: "Invalid logo!" }, { status: 405 });
     }

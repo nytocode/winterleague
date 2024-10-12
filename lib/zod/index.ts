@@ -18,3 +18,17 @@ export const WeeklyScheduleFormSchema = z.object({
   schedule: z.string().optional(),
   matches: z.array(MatchFormSchema),
 });
+
+export const PlayerFormSchema = z.object({
+  id: z.string().optional(),
+  team: z.string().min(1),
+  first_name: z.string().min(1),
+  last_name: z.string(),
+  image: z.any(),
+});
+
+export const GoalFormSchema = z.object({
+  id: z.string().optional(),
+  player: z.string(),
+  match: z.string(),
+});

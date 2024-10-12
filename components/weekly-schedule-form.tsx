@@ -19,6 +19,7 @@ import { Team } from "@prisma/client";
 import { Separator } from "./ui/separator";
 import { OverlayLoader } from "./loader";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const matches = new Array(7).fill(0).map(() => ({
   home: "",
@@ -26,6 +27,7 @@ const matches = new Array(7).fill(0).map(() => ({
 }));
 
 export const WeeklyScheduleForm = () => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const { data: teams } = useQuery({
     queryKey: ["teams"],
@@ -46,6 +48,7 @@ export const WeeklyScheduleForm = () => {
     },
     onSuccess() {
       setOpen(false);
+      router.refresh();
     },
   });
 

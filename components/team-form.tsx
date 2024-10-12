@@ -9,7 +9,13 @@ import { Input } from "./ui/input";
 import { ImagePicker } from "./image-picker";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 export const TeamForm = () => {
   const query_client = useQueryClient();
@@ -47,6 +53,9 @@ export const TeamForm = () => {
       <DialogTrigger asChild>
         <Button size={"sm"}>Aggiungi squadra</Button>
       </DialogTrigger>
+      <DialogHeader>
+        <DialogTitle>Squadra</DialogTitle>
+      </DialogHeader>
       <DialogContent>
         <Form {...form}>
           <form
