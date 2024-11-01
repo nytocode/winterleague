@@ -37,6 +37,7 @@ export default async function Page() {
     d: number;
     t: number;
     p: number;
+    goals_diff: number;
     total: number;
   }[] = [];
 
@@ -46,6 +47,7 @@ export default async function Page() {
     let tie = 0;
     let points = 0;
     let total = 0;
+    let goals_diff = 0;
     const team_matches = matches.filter((match) =>
       match.teams.some((t) => t.id === team.id),
     );
@@ -70,6 +72,8 @@ export default async function Page() {
         points += 1;
       }
 
+      goals_diff += team_goals - (total_goals - team_goals);
+
       total++;
     });
 
@@ -79,10 +83,16 @@ export default async function Page() {
       d: defeat,
       t: tie,
       p: points,
+      goals_diff: goals_diff,
       total: total,
     });
 
-    ranking.sort((a, b) => b.p - a.p);
+    ranking.sort((a, b) => {
+      if (b.p - a.p === 0) {
+        return b.goals_diff - a.goals_diff;
+      }
+      return b.p - a.p;
+    });
   });
 
   return (
