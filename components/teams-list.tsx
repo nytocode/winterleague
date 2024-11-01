@@ -4,9 +4,10 @@ import { Team } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { OverlayLoader } from "./overlay-loader";
 
 export const TeamsList = () => {
-  const { data: teams } = useQuery({
+  const { data: teams, isPending } = useQuery({
     queryKey: ["teams"],
     queryFn: async () => {
       const res = await fetch("/api/teams");
@@ -16,8 +17,8 @@ export const TeamsList = () => {
     },
   });
 
-  if (!teams) {
-    return <div>Caricamento...</div>;
+  if (isPending || !teams) {
+    return <OverlayLoader />;
   }
 
   if (teams.length === 0) {

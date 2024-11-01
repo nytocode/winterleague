@@ -1,23 +1,19 @@
 "use client";
 
-import { Team } from "@prisma/client";
+import download from "downloadjs";
 import { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import { Download } from "lucide-react";
-import download from "downloadjs";
 
 interface Props {
   ranking: {
-    team: Team;
-    w: number;
-    d: number;
-    t: number;
-    p: number;
-    total: number;
+    name: string;
+    goals: number;
+    logo: string;
   }[];
 }
 
-export const RankingPost = ({ ranking }: Props) => {
+export const ScorersRankingPost = ({ ranking }: Props) => {
   const canvas_ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -69,13 +65,13 @@ export const RankingPost = ({ ranking }: Props) => {
             290,
           );
           ctx.fillText(
-            "CLASSIFICA",
-            width / 2 - ctx.measureText("CLASSIFICA").width / 2,
+            "MARCATORI",
+            width / 2 - ctx.measureText("MARCATORI").width / 2,
             340,
           );
 
           ranking.forEach((rank, i) => {
-            if (i < 7) {
+            if (i < 5) {
               ctx.fillStyle = "#CBA84E";
               ctx.fillRect(width / 2 - 510, 540 + 95 * i, 70, 70);
               ctx.fillStyle = "#CBA84E";
@@ -97,7 +93,7 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx.lineWidth = 2;
               ctx.stroke();
               const teamLogo = new Image();
-              teamLogo.src = rank.team.logo;
+              teamLogo.src = rank.logo;
               teamLogo.crossOrigin = "anonymous";
               teamLogo.onload = () => {
                 ctx.drawImage(
@@ -111,7 +107,7 @@ export const RankingPost = ({ ranking }: Props) => {
 
               ctx.textBaseline = "middle";
               ctx.fillStyle = "#000";
-              ctx.fillText(rank.team.name, width / 2 - 335, 580 + 95 * i);
+              ctx.fillText(rank.name, width / 2 - 335, 580 + 95 * i);
 
               ctx.fillStyle = "#FFF";
               ctx.fillRect(width / 2 - 80, 540 + 95 * i, 70, 70);
@@ -122,12 +118,14 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx.textBaseline = "middle";
               ctx.fillStyle = "#000";
               ctx.fillText(
-                rank.p.toString(),
-                width / 2 - 45 - ctx.measureText(rank.p.toString()).width / 2,
+                rank.goals.toString(),
+                width / 2 -
+                  45 -
+                  ctx.measureText(rank.goals.toString()).width / 2,
                 575 + 95 * i,
               );
             } else {
-              const j = i - 7;
+              const j = i - 5;
 
               ctx.fillStyle = "#CBA84E";
               ctx.fillRect(width / 2 + 10, 540 + 95 * j, 70, 70);
@@ -150,7 +148,7 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx.lineWidth = 2;
               ctx.stroke();
               const teamLogo = new Image();
-              teamLogo.src = rank.team.logo;
+              teamLogo.src = rank.logo;
               teamLogo.crossOrigin = "anonymous";
               teamLogo.onload = () => {
                 ctx.drawImage(
@@ -164,7 +162,7 @@ export const RankingPost = ({ ranking }: Props) => {
 
               ctx.textBaseline = "middle";
               ctx.fillStyle = "#000";
-              ctx.fillText(rank.team.name, width / 2 + 185, 580 + 95 * j);
+              ctx.fillText(rank.name, width / 2 + 185, 580 + 95 * j);
 
               ctx.fillStyle = "#FFF";
               ctx.fillRect(width / 2 + 440, 540 + 95 * j, 70, 70);
@@ -175,8 +173,10 @@ export const RankingPost = ({ ranking }: Props) => {
               ctx.textBaseline = "middle";
               ctx.fillStyle = "#000";
               ctx.fillText(
-                rank.p.toString(),
-                width / 2 + 475 - ctx.measureText(rank.p.toString()).width / 2,
+                rank.goals.toString(),
+                width / 2 +
+                  475 -
+                  ctx.measureText(rank.goals.toString()).width / 2,
                 575 + 95 * j,
               );
             }
@@ -184,7 +184,7 @@ export const RankingPost = ({ ranking }: Props) => {
         });
       };
     };
-  }, [ranking]);
+  }, [ranking, canvas_ref]);
 
   const onDownload = () => {
     const canvas = canvas_ref.current;
@@ -192,7 +192,7 @@ export const RankingPost = ({ ranking }: Props) => {
     if (canvas) {
       download(
         canvas.toDataURL("image/jpeg", 1.0),
-        "classifica.jpg",
+        "marcatori.jpg",
         "image/jpeg",
       );
     }

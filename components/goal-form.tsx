@@ -17,9 +17,8 @@ import {
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { PlusIcon } from "lucide-react";
-import { OverlayLoader } from "./loader";
+import { OverlayLoader } from "./overlay-loader";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface Props {
   players: Prisma.PlayerGetPayload<{

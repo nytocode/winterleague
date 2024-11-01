@@ -53,7 +53,7 @@ export default async function Page() {
     team_matches.forEach((match) => {
       const total_goals = match.goals.length;
       const team_goals = match.goals.filter(
-        (goal) => goal.player.team_id === team.id,
+        (goal) => goal.team_id === team.id,
       ).length;
 
       if (team_goals > total_goals - team_goals) {
@@ -82,11 +82,11 @@ export default async function Page() {
       total: total,
     });
 
-    ranking.sort((a, b) => a.p - b.p);
+    ranking.sort((a, b) => b.p - a.p);
   });
 
   return (
-    <div className="py-4 space-y-4">
+    <div className="py-4 flex flex-col gap-4">
       <Button asChild className="w-full" size={"sm"}>
         <Link href={"/ranking/preview"}>
           Vai ai download <ArrowRight className="ml-2 h-4 w-4" />

@@ -1,8 +1,7 @@
 import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
-import { z } from "zod";
 
-export async function PATCH(
+export async function POST(
   req: Request,
   { params: { id } }: { params: { id: string } },
 ) {
@@ -15,37 +14,35 @@ export async function PATCH(
 
     const values = await req.json();
 
-    const validatedFields = z
-      .object({
-        played: z.boolean(),
-      })
-      .safeParse(values);
+    const { team } = values;
 
-    if (!validatedFields.success) {
-      return Response.json({ message: "Invalid fields!" }, { status: 500 });
+    if (!team) {
+      return Response.json({ message: "Invalid Fields" }, { status: 500 });
     }
 
-    const { played } = validatedFields.data;
-
-    if (!played) {
-      await db.goal.deleteMany({
-        where: {
-          AND: [
-            {
-              match_id: id,
-            },
-            {
-              player_id: undefined,
-            },
-          ],
+    await db.goal.createMany({
+      data: [
+        {
+          match_id: id,
+          team_id: team,
         },
-      });
-    }
+        {
+          match_id: id,
+          team_id: team,
+        },
+        {
+          match_id: id,
+          team_id: team,
+        },
+      ],
+    });
 
     await db.match.update({
-      where: { id },
+      where: {
+        id,
+      },
       data: {
-        played,
+        played: true,
       },
     });
 

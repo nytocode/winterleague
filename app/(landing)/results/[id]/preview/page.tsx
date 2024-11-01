@@ -1,6 +1,6 @@
+import { ResultsPost } from "@/components/results/results-post";
+import { ResultsStory } from "@/components/results/results-story";
 import { RoundToggle } from "@/components/round-toogle";
-import { SchedulePost } from "@/components/schedule/schedule-post";
-import { ScheduleStory } from "@/components/schedule/schedule-story";
 import { TypeToggle } from "@/components/type-toggle";
 import { db } from "@/lib/db";
 import { Round } from "@prisma/client";
@@ -27,6 +27,11 @@ export default async function Page({
       matches: {
         include: {
           teams: true,
+          goals: {
+            include: {
+              team: true,
+            },
+          },
         },
       },
     },
@@ -46,8 +51,8 @@ export default async function Page({
     <div className="py-4 flex flex-col gap-4">
       <RoundToggle />
       <TypeToggle />
-      {type !== "P" && <ScheduleStory n={weekly.number} matches={matches} />}
-      {type === "P" && <SchedulePost n={weekly.number} matches={matches} />}
+      {type !== "P" && <ResultsStory n={weekly.number} matches={matches} />}
+      {type === "P" && <ResultsPost n={weekly.number} matches={matches} />}
     </div>
   );
 }

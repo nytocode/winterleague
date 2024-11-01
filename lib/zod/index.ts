@@ -29,6 +29,6 @@ export const PlayerFormSchema = z.object({
 
 export const GoalFormSchema = z.object({
   id: z.string().optional(),
-  player: z.string(),
+  player: z.string().optional(),
   match: z.string(),
 });

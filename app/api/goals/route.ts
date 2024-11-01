@@ -18,12 +18,26 @@ export async function POST(req: Request) {
       return Response.json({ message: "Invalid fields" }, { status: 500 });
     }
 
-    const { player, match } = validatedFields.data;
+    const { player: player_id, match } = validatedFields.data;
+
+    const player = await db.player.findUnique({
+      where: {
+        id: player_id,
+      },
+    });
+
+    if (!player) {
+      return Response.json(
+        { message: "Player does not exist!" },
+        { status: 500 },
+      );
+    }
 
     await db.goal.create({
       data: {
-        player_id: player,
+        player_id: player_id,
         match_id: match,
+        team_id: player.team_id,
       },
     });
 

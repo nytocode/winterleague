@@ -37,7 +37,7 @@ export async function POST(req: Request) {
             })),
             ...matches.map((match) => ({
               teams: {
-                connect: [{ id: match.away }, { id: match.home }].reverse(),
+                connect: [{ id: match.away }, { id: match.home }],
               },
               round: Round.Second,
             })),

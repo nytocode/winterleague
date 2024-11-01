@@ -23,7 +23,7 @@ export const RoundToggle = () => {
       <button
         className={cn(
           "flex-1 border hover:bg-accent outline-0 active:bg-accent p-2 text-center rounded-md font-medium",
-          round === Round.First && "bg-accent",
+          round !== Round.Second && "bg-accent",
         )}
         onClick={() => onChange(Round.First)}
       >

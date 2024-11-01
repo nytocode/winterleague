@@ -72,6 +72,30 @@ export const Sidebar = () => {
                 Classifica
               </Button>
             </li>
+            <li>
+              <Button
+                onClick={() => navigateTo("/scorers-ranking")}
+                className={cn(
+                  "w-full border hover:bg-accent active:bg-white",
+                  pathname === "/scorers-ranking" && "bg-accent",
+                )}
+                variant={"ghost"}
+              >
+                Classifica marcatori
+              </Button>
+            </li>
+            <li>
+              <Button
+                onClick={() => navigateTo("/results")}
+                className={cn(
+                  "w-full border hover:bg-accent active:bg-white",
+                  pathname === "/results" && "bg-accent",
+                )}
+                variant={"ghost"}
+              >
+                Risultati
+              </Button>
+            </li>
           </ul>
         </aside>
       </SheetContent>

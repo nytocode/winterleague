@@ -17,7 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { OverlayLoader } from "./loader";
+import { OverlayLoader } from "./overlay-loader";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -39,6 +39,11 @@ export const PlayerForm = ({ player, team, children }: Props) => {
     },
     onSuccess: () => {
       setOpen(false);
+      form.reset({
+        first_name: player?.first_name ?? "",
+        last_name: player?.last_name ?? "",
+        team: team,
+      });
       router.refresh();
     },
   });
@@ -82,6 +87,10 @@ export const PlayerForm = ({ player, team, children }: Props) => {
     }
   };
 
+  if (isPending) {
+    return <OverlayLoader />;
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -89,7 +98,6 @@ export const PlayerForm = ({ player, team, children }: Props) => {
         <DialogHeader>
           <DialogTitle>Giocatore</DialogTitle>
         </DialogHeader>
-        {isPending && <OverlayLoader />}
         <Form {...form}>
           <form
             action=""

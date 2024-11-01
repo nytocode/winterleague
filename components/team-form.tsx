@@ -16,10 +16,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { useState } from "react";
+import { OverlayLoader } from "./overlay-loader";
 
 export const TeamForm = () => {
+  const [open, setOpen] = useState(false);
   const query_client = useQueryClient();
-  const { mutate: create_team } = useMutation({
+  const { mutate: create_team, isPending } = useMutation({
     mutationFn: async (data: FormData) => {
       return await fetch("/api/teams", {
         method: "POST",
@@ -28,6 +31,7 @@ export const TeamForm = () => {
     },
     onSuccess: () => {
       form.reset();
+      setOpen(false);
       query_client.invalidateQueries({ queryKey: ["teams"] });
     },
   });
@@ -48,15 +52,21 @@ export const TeamForm = () => {
     create_team(data);
   };
 
+  if (isPending) {
+    return <OverlayLoader />;
+  }
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size={"sm"}>Aggiungi squadra</Button>
+        <Button size={"sm"} className="w-full">
+          Aggiungi squadra
+        </Button>
       </DialogTrigger>
-      <DialogHeader>
-        <DialogTitle>Squadra</DialogTitle>
-      </DialogHeader>
-      <DialogContent>
+      <DialogContent className="w-[90%]">
+        <DialogHeader>
+          <DialogTitle>Squadra</DialogTitle>
+        </DialogHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

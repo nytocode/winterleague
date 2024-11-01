@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { OverlayLoader } from "./loader";
+import { OverlayLoader } from "./overlay-loader";
 
 interface Props {
   id: string;

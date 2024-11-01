@@ -57,7 +57,7 @@ export default async function Page({ searchParams: { type } }: Props) {
     team_matches.forEach((match) => {
       const total_goals = match.goals.length;
       const team_goals = match.goals.filter(
-        (goal) => goal.player.team_id === team.id,
+        (goal) => goal.team_id === team.id,
       ).length;
 
       if (team_goals > total_goals - team_goals) {
@@ -86,11 +86,11 @@ export default async function Page({ searchParams: { type } }: Props) {
       total: total,
     });
 
-    ranking.sort((a, b) => a.p - b.p);
+    ranking.sort((a, b) => b.p - a.p);
   });
 
   return (
-    <div className="py-4 space-y-4">
+    <div className="py-4 flex flex-col gap-4">
       <TypeToggle />
       {type !== "P" && <RankingStory ranking={ranking} />}
       {type === "P" && <RankingPost ranking={ranking} />}

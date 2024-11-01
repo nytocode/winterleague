@@ -1,8 +1,9 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { OverlayLoader } from "./loader";
+import { OverlayLoader } from "./overlay-loader";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 interface Props {
   match: string;
@@ -10,14 +11,18 @@ interface Props {
 }
 
 export const ChangeMatchStatus = ({ match, played }: Props) => {
+  const router = useRouter();
+
   const { mutate: change_status, isPending } = useMutation({
     mutationFn: async (played: boolean) => {
-      return await fetch(`/matches/${match}`, {
+      return await fetch(`/api/matches/${match}`, {
         method: "PATCH",
         body: JSON.stringify({ played }),
       });
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      router.refresh();
+    },
   });
 
   return (

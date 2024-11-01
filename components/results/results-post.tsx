@@ -12,11 +12,16 @@ interface Props {
   matches: Prisma.MatchGetPayload<{
     include: {
       teams: true;
+      goals: {
+        include: {
+          team: true;
+        };
+      };
     };
   }>[];
 }
 
-export const ScheduleStory = ({ matches, n }: Props) => {
+export const ResultsPost = ({ matches, n }: Props) => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -25,7 +30,7 @@ export const ScheduleStory = ({ matches, n }: Props) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     const bg = new Image();
-    bg.src = "/images/base-story.jpg";
+    bg.src = "/images/base-portrait.jpg";
     bg.crossOrigin = "anonymous";
     bg.onload = () => {
       ctx.drawImage(bg, 0, 0);
@@ -75,38 +80,42 @@ export const ScheduleStory = ({ matches, n }: Props) => {
 
         matches.forEach((match, i) => {
           ctx.fillStyle = "#FFF";
-          ctx.fillRect(50, 600 + 120 * i, 400, 70);
+          ctx.fillRect(50, 480 + 120 * i, 400, 70);
           ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(50, 600 + 120 * i, 400, 70);
+          ctx.strokeRect(50, 480 + 120 * i, 400, 70);
           ctx.lineWidth = 2;
           ctx.stroke();
 
           ctx.fillStyle = "#FFF";
-          ctx.fillRect(canvas.width / 2 - 70, 600 + 120 * i, 140, 70);
+          ctx.fillRect(canvas.width / 2 - 70, 480 + 120 * i, 140, 70);
           ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(canvas.width / 2 - 70, 600 + 120 * i, 140, 70);
+          ctx.strokeRect(canvas.width / 2 - 70, 480 + 120 * i, 140, 70);
           ctx.lineWidth = 2;
           ctx.stroke();
 
           ctx.fillStyle = "#FFF";
-          ctx.fillRect(canvas.width - 450, 600 + 120 * i, 400, 70);
+          ctx.fillRect(canvas.width - 450, 480 + 120 * i, 400, 70);
           ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(canvas.width - 450, 600 + 120 * i, 400, 70);
+          ctx.strokeRect(canvas.width - 450, 480 + 120 * i, 400, 70);
           ctx.lineWidth = 2;
           ctx.stroke();
-
-          ctx.textBaseline = "middle";
-          ctx.fillStyle = "#000";
-          ctx.fillText(
-            "VS",
-            canvas.width / 2 - ctx.measureText("VS").width / 2,
-            640 + 120 * i,
-          );
 
           const teams = [...match.teams];
           if (match.round === Round.Second) {
             teams.reverse();
           }
+
+          const result = match.played
+            ? `${match.goals.filter((goal) => goal.team.id === teams[0].id).length} - ${match.goals.filter((goal) => goal.team.id === teams[1].id).length}`
+            : "-";
+
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#000";
+          ctx.fillText(
+            result,
+            canvas.width / 2 - ctx.measureText(result).width / 2,
+            520 + 120 * i,
+          );
 
           // HOME TEAM
           const teamLogo1 = new Image();
@@ -116,13 +125,13 @@ export const ScheduleStory = ({ matches, n }: Props) => {
             ctx.drawImage(
               teamLogo1,
               70,
-              635 - 25 * (teamLogo1.height / teamLogo1.width) + 120 * i,
+              515 - 25 * (teamLogo1.height / teamLogo1.width) + 120 * i,
               50,
               50 * (teamLogo1.height / teamLogo1.width),
             );
           };
 
-          ctx.fillText(teams[0].name, 140, 640 + 120 * i);
+          ctx.fillText(teams[0].name, 140, 520 + 120 * i);
 
           // AWAY TEAM
           const teamLogo2 = new Image();
@@ -132,13 +141,13 @@ export const ScheduleStory = ({ matches, n }: Props) => {
             ctx.drawImage(
               teamLogo2,
               canvas.width - 425,
-              635 - 25 * (teamLogo2.height / teamLogo2.width) + 120 * i,
+              515 - 25 * (teamLogo2.height / teamLogo2.width) + 120 * i,
               50,
               50 * (teamLogo2.height / teamLogo2.width),
             );
           };
 
-          ctx.fillText(teams[1].name, canvas.width - 350, 640 + 120 * i);
+          ctx.fillText(teams[1].name, canvas.width - 350, 520 + 120 * i);
         });
       });
     };
@@ -164,8 +173,8 @@ export const ScheduleStory = ({ matches, n }: Props) => {
       <canvas
         ref={ref}
         width={"1080px"}
-        height={"1920px"}
-        className="aspect-[9/16] max-w-full"
+        height={"1350px"}
+        className="aspect-[4/5] max-w-full"
       />
     </div>
   );

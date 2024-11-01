@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ChangeMatchStatus } from "@/components/change-match-status";
+import { WinByForfait } from "@/components/win-by-forfait";
 
 interface Props {
   params: {
@@ -47,31 +48,52 @@ export default async function Page({ params: { id } }: Props) {
   }
 
   return (
-    <div className="py-4 space-y-4">
+    <div className="py-4 flex flex-col gap-4">
       <ChangeMatchStatus match={id} played={match.played} />
-      <div className="grid grid-cols-11 p-2 items-center">
-        <div className="col-span-5 overflow-hidden flex items-center gap-2">
-          <span className="overflow-hidden flex-1 text-nowrap text-ellipsis text-xs font-medium">
-            {match.teams[0].name}
-          </span>
-          <Image
-            src={match.teams[0].logo}
-            alt="team-logo"
-            width={40}
-            height={40}
-          />
+      <div className="grid grid-cols-2 p-2 gap-2">
+        <div className="col-span-1 flex flex-col gap-2">
+          <div className="overflow-hidden flex items-center h-[60px] gap-2">
+            <span className="overflow-hidden flex-1 text-nowrap text-ellipsis text-xs font-medium">
+              {match.teams[0].name}
+            </span>
+            <Image
+              src={match.teams[0].logo}
+              alt="team-logo"
+              width={40}
+              height={40}
+            />
+            <span className="font-bold">
+              {
+                match.goals.filter((goal) => goal.team_id === match.teams[0].id)
+                  .length
+              }
+            </span>
+          </div>
+          {!match.played && (
+            <WinByForfait match={id} team={match.teams[0].id} />
+          )}
         </div>
-        <span className="col-span-1 text-center font-bold">-</span>
-        <div className="col-span-5 overflow-hidden flex items-center gap-2">
-          <Image
-            src={match.teams[1].logo}
-            alt="team-logo"
-            width={40}
-            height={40}
-          />
-          <span className="overflow-hidden flex-1 text-right text-nowrap text-ellipsis text-xs font-medium">
-            {match.teams[1].name}
-          </span>
+        <div className="col-span-1 flex flex-col gap-2">
+          <div className="overflow-hidden flex items-center h-[60px] gap-2">
+            <span className="font-bold">
+              {
+                match.goals.filter((goal) => goal.team_id === match.teams[1].id)
+                  .length
+              }
+            </span>
+            <Image
+              src={match.teams[1].logo}
+              alt="team-logo"
+              width={40}
+              height={40}
+            />
+            <span className="overflow-hidden flex-1 text-right text-nowrap text-ellipsis text-xs font-medium">
+              {match.teams[1].name}
+            </span>
+          </div>
+          {!match.played && (
+            <WinByForfait match={id} team={match.teams[1].id} />
+          )}
         </div>
       </div>
       <Separator />
@@ -86,18 +108,19 @@ export default async function Page({ params: { id } }: Props) {
       />
       <ul>
         {_.chain(match.goals)
-          .groupBy((goal) => goal.player.id)
+          .filter((goal) => goal.player_id !== null)
+          .groupBy((goal) => goal.player?.id)
           .map((gbp, k) => (
             <li key={k} className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <Image
-                  src={gbp[0].player.team.logo}
+                  src={gbp[0].player?.team.logo ?? ""}
                   alt="logo"
                   width={20}
                   height={20}
                 />
                 <span className="font-medium text-sm">
-                  {`${gbp[0].player.last_name} ${gbp[0].player.last_name?.split("")[0]}.`}
+                  {`${gbp[0].player?.last_name} ${gbp[0].player?.first_name?.split("")[0]}.`}
                 </span>
               </div>
               <div className="flex items-center gap-1">

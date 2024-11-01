@@ -1,26 +1,23 @@
 "use client";
 
-import { Prisma, Round } from "@prisma/client";
 import download from "downloadjs";
 import { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import { Download } from "lucide-react";
-import { numberToRoman } from "@/lib/utils";
 
 interface Props {
-  n: number;
-  matches: Prisma.MatchGetPayload<{
-    include: {
-      teams: true;
-    };
-  }>[];
+  ranking: {
+    logo: string;
+    name: string;
+    goals: number;
+  }[];
 }
 
-export const ScheduleStory = ({ matches, n }: Props) => {
-  const ref = useRef<HTMLCanvasElement>(null);
+export const ScorersRankingStory = ({ ranking }: Props) => {
+  const canvas_ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = ref.current;
+    const canvas = canvas_ref.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -29,7 +26,6 @@ export const ScheduleStory = ({ matches, n }: Props) => {
     bg.crossOrigin = "anonymous";
     bg.onload = () => {
       ctx.drawImage(bg, 0, 0);
-
       const logo = new Image();
       logo.src = "/images/logo.png";
       logo.crossOrigin = "anonymous";
@@ -41,10 +37,8 @@ export const ScheduleStory = ({ matches, n }: Props) => {
         "Righteous",
         "url(/fonts/Righteous-Regular.ttf)",
       );
-
       font.load().then((f) => {
         document.fonts.add(f);
-
         ctx.font = "64px Righteous";
         ctx.textBaseline = "top";
         ctx.fillStyle = "#CBA84E";
@@ -60,9 +54,8 @@ export const ScheduleStory = ({ matches, n }: Props) => {
           325,
         );
         ctx.fillText(
-          `GIORNATA ${numberToRoman(n)}`,
-          canvas.width / 2 -
-            ctx.measureText(`GIORNATA ${numberToRoman(n)}`).width / 2,
+          "MARCATORI",
+          canvas.width / 2 - ctx.measureText("MARCATORI").width / 2,
           370,
         );
 
@@ -73,83 +66,73 @@ export const ScheduleStory = ({ matches, n }: Props) => {
         ctx.strokeStyle = "#CBA84E";
         ctx.stroke();
 
-        matches.forEach((match, i) => {
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(50, 600 + 120 * i, 400, 70);
+        ranking.forEach((rank, i) => {
           ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(50, 600 + 120 * i, 400, 70);
+          ctx.fillRect(canvas.width / 2 - 320, 550 + 90 * i, 70, 70);
+          ctx.fillStyle = "#CBA84E";
+          ctx.strokeRect(canvas.width / 2 - 320, 550 + 90 * i, 70, 70);
           ctx.lineWidth = 2;
           ctx.stroke();
-
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(canvas.width / 2 - 70, 600 + 120 * i, 140, 70);
-          ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(canvas.width / 2 - 70, 600 + 120 * i, 140, 70);
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(canvas.width - 450, 600 + 120 * i, 400, 70);
-          ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(canvas.width - 450, 600 + 120 * i, 400, 70);
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
           ctx.textBaseline = "middle";
           ctx.fillStyle = "#000";
           ctx.fillText(
-            "VS",
-            canvas.width / 2 - ctx.measureText("VS").width / 2,
-            640 + 120 * i,
+            (i + 1).toString(),
+            canvas.width / 2 -
+              285 -
+              ctx.measureText((i + 1).toString()).width / 2,
+            590 + 90 * i,
           );
 
-          const teams = [...match.teams];
-          if (match.round === Round.Second) {
-            teams.reverse();
-          }
-
-          // HOME TEAM
-          const teamLogo1 = new Image();
-          teamLogo1.src = teams[0].logo;
-          teamLogo1.crossOrigin = "anonymous";
-          teamLogo1.onload = () => {
+          ctx.fillStyle = "#FFF";
+          ctx.fillRect(canvas.width / 2 - 230, 550 + 90 * i, 450, 70);
+          ctx.fillStyle = "#CBA84E";
+          ctx.strokeRect(canvas.width / 2 - 230, 550 + 90 * i, 450, 70);
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          const teamLogo = new Image();
+          teamLogo.src = rank.logo;
+          teamLogo.crossOrigin = "anonymous";
+          teamLogo.onload = () => {
             ctx.drawImage(
-              teamLogo1,
-              70,
-              635 - 25 * (teamLogo1.height / teamLogo1.width) + 120 * i,
+              teamLogo,
+              canvas.width / 2 - 205,
+              585 - 25 * (teamLogo.height / teamLogo.width) + 90 * i,
               50,
-              50 * (teamLogo1.height / teamLogo1.width),
+              50 * (teamLogo.height / teamLogo.width),
             );
           };
 
-          ctx.fillText(teams[0].name, 140, 640 + 120 * i);
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#000";
+          ctx.fillText(rank.name, canvas.width / 2 - 130, 590 + 90 * i);
 
-          // AWAY TEAM
-          const teamLogo2 = new Image();
-          teamLogo2.src = teams[1].logo;
-          teamLogo2.crossOrigin = "anonymous";
-          teamLogo2.onload = () => {
-            ctx.drawImage(
-              teamLogo2,
-              canvas.width - 425,
-              635 - 25 * (teamLogo2.height / teamLogo2.width) + 120 * i,
-              50,
-              50 * (teamLogo2.height / teamLogo2.width),
-            );
-          };
-
-          ctx.fillText(teams[1].name, canvas.width - 350, 640 + 120 * i);
+          ctx.fillStyle = "#FFF";
+          ctx.fillRect(canvas.width / 2 + 240, 550 + 90 * i, 70, 70);
+          ctx.fillStyle = "#CBA84E";
+          ctx.strokeRect(canvas.width / 2 + 240, 550 + 90 * i, 70, 70);
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#000";
+          ctx.fillText(
+            rank.goals.toString(),
+            canvas.width / 2 +
+              275 -
+              ctx.measureText(rank.goals.toString()).width / 2,
+            590 + 90 * i,
+          );
         });
       });
     };
-  }, [ref, matches, n]);
+  }, [ranking, canvas_ref]);
 
   const onDownload = () => {
-    const canvas = ref.current;
+    const canvas = canvas_ref.current;
+
     if (canvas) {
       download(
         canvas.toDataURL("image/jpeg", 1.0),
-        "giornata.jpg",
+        "marcatori.jpg",
         "image/jpeg",
       );
     }
@@ -162,7 +145,7 @@ export const ScheduleStory = ({ matches, n }: Props) => {
         <Download className="ml-2 h-4 w-4" />
       </Button>
       <canvas
-        ref={ref}
+        ref={canvas_ref}
         width={"1080px"}
         height={"1920px"}
         className="aspect-[9/16] max-w-full"

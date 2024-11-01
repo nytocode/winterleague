@@ -1,4 +1,3 @@
-import { WeeklyScheduleForm } from "@/components/weekly-schedule-form";
 import { db } from "@/lib/db";
 import { numberToRoman } from "@/lib/utils";
 import { Round } from "@prisma/client";
@@ -14,13 +13,12 @@ export default async function Page() {
 
   return (
     <div className="py-4 flex flex-col gap-4">
-      <WeeklyScheduleForm />
       <ul className="space-y-4">
         {schedule?.weekly_schedules.map((weekly) => (
           <li key={weekly.id}>
             <Link
               className="flex items-center justify-between rounded-sm p-3 border"
-              href={`/schedules/${weekly.id}?round=${Round.First}`}
+              href={`/results/${weekly.id}?round=${Round.First}`}
             >
               <span className="font-medium">{`Giornata ${numberToRoman(weekly.number)}`}</span>
               <ChevronRight />

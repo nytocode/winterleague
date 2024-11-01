@@ -70,52 +70,27 @@ export const RankingStory = ({ ranking }: Props) => {
         ctx.strokeStyle = "#CBA84E";
         ctx.stroke();
 
-        // WIN, DEFEAT, TIE, POINTS
-        ctx.fillStyle = "#FFF";
-        ctx.fillRect(600, 460, 70, 70);
-        ctx.fillStyle = "#CBA84E";
-        ctx.strokeRect(600, 460, 70, 70);
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#000";
-        ctx.fillText("V", 635 - ctx.measureText("V").width / 2, 495);
-
-        ctx.fillStyle = "#FFF";
-        ctx.fillRect(700, 460, 70, 70);
-        ctx.fillStyle = "#CBA84E";
-        ctx.strokeRect(700, 460, 70, 70);
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#000";
-        ctx.fillText("S", 735 - ctx.measureText("S").width / 2, 495);
-
-        ctx.fillStyle = "#FFF";
-        ctx.fillRect(800, 460, 70, 70);
-        ctx.fillStyle = "#CBA84E";
-        ctx.strokeRect(800, 460, 70, 70);
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#000";
-        ctx.fillText("P", 835 - ctx.measureText("P").width / 2, 495);
-
-        ctx.fillStyle = "#FFF";
-        ctx.fillRect(900, 460, 70, 70);
-        ctx.fillStyle = "#CBA84E";
-        ctx.strokeRect(900, 460, 70, 70);
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#000";
-        ctx.fillText("P", 935 - ctx.measureText("P").width / 2, 495);
-
         ranking.forEach((rank, i) => {
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(100, 550 + 90 * i, 450, 70);
           ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(100, 550 + 90 * i, 450, 70);
+          ctx.fillRect(canvas.width / 2 - 320, 550 + 90 * i, 70, 70);
+          ctx.fillStyle = "#CBA84E";
+          ctx.strokeRect(canvas.width / 2 - 320, 550 + 90 * i, 70, 70);
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#000";
+          ctx.fillText(
+            (i + 1).toString(),
+            canvas.width / 2 -
+              285 -
+              ctx.measureText((i + 1).toString()).width / 2,
+            590 + 90 * i,
+          );
+
+          ctx.fillStyle = "#FFF";
+          ctx.fillRect(canvas.width / 2 - 230, 550 + 90 * i, 450, 70);
+          ctx.fillStyle = "#CBA84E";
+          ctx.strokeRect(canvas.width / 2 - 230, 550 + 90 * i, 450, 70);
           ctx.lineWidth = 2;
           ctx.stroke();
           const teamLogo = new Image();
@@ -124,7 +99,7 @@ export const RankingStory = ({ ranking }: Props) => {
           teamLogo.onload = () => {
             ctx.drawImage(
               teamLogo,
-              125,
+              canvas.width / 2 - 205,
               585 - 25 * (teamLogo.height / teamLogo.width) + 90 * i,
               50,
               50 * (teamLogo.height / teamLogo.width),
@@ -133,61 +108,21 @@ export const RankingStory = ({ ranking }: Props) => {
 
           ctx.textBaseline = "middle";
           ctx.fillStyle = "#000";
-          ctx.fillText(rank.team.name, 195, 590 + 90 * i);
+          ctx.fillText(rank.team.name, canvas.width / 2 - 130, 590 + 90 * i);
 
           ctx.fillStyle = "#FFF";
-          ctx.fillRect(600, 550 + 90 * i, 70, 70);
+          ctx.fillRect(canvas.width / 2 + 240, 550 + 90 * i, 70, 70);
           ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(600, 550 + 90 * i, 70, 70);
-          ctx.lineWidth = 2;
-          ctx.stroke();
-          ctx.textBaseline = "middle";
-          ctx.fillStyle = "#000";
-          ctx.fillText(
-            rank.w.toString(),
-            635 - ctx.measureText(rank.w.toString()).width / 2,
-            590 + 90 * i,
-          );
-
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(700, 550 + 90 * i, 70, 70);
-          ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(700, 550 + 90 * i, 70, 70);
-          ctx.lineWidth = 2;
-          ctx.stroke();
-          ctx.textBaseline = "middle";
-          ctx.fillStyle = "#000";
-          ctx.fillText(
-            rank.d.toString(),
-            735 - ctx.measureText(rank.d.toString()).width / 2,
-            590 + 90 * i,
-          );
-
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(800, 550 + 90 * i, 70, 70);
-          ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(800, 550 + 90 * i, 70, 70);
-          ctx.lineWidth = 2;
-          ctx.stroke();
-          ctx.textBaseline = "middle";
-          ctx.fillStyle = "#000";
-          ctx.fillText(
-            rank.t.toString(),
-            835 - ctx.measureText(rank.t.toString()).width / 2,
-            590 + 90 * i,
-          );
-
-          ctx.fillStyle = "#FFF";
-          ctx.fillRect(900, 550 + 90 * i, 70, 70);
-          ctx.fillStyle = "#CBA84E";
-          ctx.strokeRect(900, 550 + 90 * i, 70, 70);
+          ctx.strokeRect(canvas.width / 2 + 240, 550 + 90 * i, 70, 70);
           ctx.lineWidth = 2;
           ctx.stroke();
           ctx.textBaseline = "middle";
           ctx.fillStyle = "#000";
           ctx.fillText(
             rank.p.toString(),
-            935 - ctx.measureText(rank.p.toString()).width / 2,
+            canvas.width / 2 +
+              275 -
+              ctx.measureText(rank.p.toString()).width / 2,
             590 + 90 * i,
           );
         });

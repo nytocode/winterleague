@@ -17,7 +17,7 @@ import {
 } from "./ui/select";
 import { Team } from "@prisma/client";
 import { Separator } from "./ui/separator";
-import { OverlayLoader } from "./loader";
+import { OverlayLoader } from "./overlay-loader";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -70,6 +70,10 @@ export const WeeklyScheduleForm = () => {
     create_schedule(values);
   };
 
+  if (isPending) {
+    return <OverlayLoader />;
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -78,7 +82,6 @@ export const WeeklyScheduleForm = () => {
         </Button>
       </DialogTrigger>
       <DialogContent className="w-[90%]">
-        {isPending && <OverlayLoader />}
         <DialogTitle className="text-center">Giornata</DialogTitle>
         <Separator />
         <Form {...form}>

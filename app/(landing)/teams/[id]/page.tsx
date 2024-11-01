@@ -27,7 +27,7 @@ export default async function Page({ params: { id } }: Props) {
   }
 
   return (
-    <div className="space-y-4 py-4">
+    <div className="flex flex-col gap-4 py-4">
       <div className="flex flex-col items-center gap-2">
         <Image src={team.logo} alt="logo" width={50} height={50} />
         <span className="font-semibold text-lg">{team.name}</span>
@@ -40,7 +40,7 @@ export default async function Page({ params: { id } }: Props) {
       </PlayerForm>
       {team.players.length > 0 && (
         <>
-          <ul>
+          <ul className="flex flex-col gap-2">
             {team.players.map((player) => (
               <li
                 key={player.id}

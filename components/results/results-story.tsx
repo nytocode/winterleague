@@ -12,11 +12,16 @@ interface Props {
   matches: Prisma.MatchGetPayload<{
     include: {
       teams: true;
+      goals: {
+        include: {
+          team: true;
+        };
+      };
     };
   }>[];
 }
 
-export const ScheduleStory = ({ matches, n }: Props) => {
+export const ResultsStory = ({ matches, n }: Props) => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -95,18 +100,22 @@ export const ScheduleStory = ({ matches, n }: Props) => {
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          ctx.textBaseline = "middle";
-          ctx.fillStyle = "#000";
-          ctx.fillText(
-            "VS",
-            canvas.width / 2 - ctx.measureText("VS").width / 2,
-            640 + 120 * i,
-          );
-
           const teams = [...match.teams];
           if (match.round === Round.Second) {
             teams.reverse();
           }
+
+          const result = match.played
+            ? `${match.goals.filter((goal) => goal.team.id === teams[0].id).length} - ${match.goals.filter((goal) => goal.team.id === teams[1].id).length}`
+            : "-";
+
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#000";
+          ctx.fillText(
+            result,
+            canvas.width / 2 - ctx.measureText(result).width / 2,
+            640 + 120 * i,
+          );
 
           // HOME TEAM
           const teamLogo1 = new Image();

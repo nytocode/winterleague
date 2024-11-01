@@ -14,6 +14,7 @@ model Team {
   logo    String
   players Player[]
   matches Match[]
+  goals   Goal[]
 }
 
 model Player {
@@ -42,15 +43,18 @@ model Match {
 }
 
 model Goal {
-  id        String @id @default(cuid())
-  player    Player @relation(fields: [player_id], references: [id])
-  player_id String
-  match     Match  @relation(fields: [match_id], references: [id])
+  id        String  @id @default(cuid())
+  team      Team    @relation(fields: [team_id], references: [id])
+  team_id   String
+  player    Player? @relation(fields: [player_id], references: [id])
+  player_id String?
+  match     Match   @relation(fields: [match_id], references: [id])
   match_id  String
 }
 
 model WeeklySchedule {
   id          String    @id @default(cuid())
+  number      Int       @default(autoincrement())
   matches     Match[]
   schedule    Schedule? @relation(fields: [schedule_id], references: [id])
   schedule_id String?
