@@ -48,7 +48,7 @@ export default async function Page() {
           .groupBy((goal) => goal.player_id)
           .map((gbp) => ({
             logo: gbp[0].player?.team.logo,
-            name: `${gbp[0].player?.last_name} ${gbp[0].player?.last_name?.split("")[0]}.`,
+            name: `${gbp[0].player?.last_name} ${gbp[0].player?.first_name?.split("")[0]}.`,
             goals: gbp.length,
           }))
           .orderBy((scorer) => scorer.goals)
